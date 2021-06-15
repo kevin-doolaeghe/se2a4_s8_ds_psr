@@ -1,0 +1,32 @@
+Vous devez écrire votre programme dans Programme/programme.c
+Vous devez utiliser les fonctions des bibliothèques com et flux
+
+Deux programmes possibles : un micro-serveur ou un micro-client.
+
+Pour le micro-serveur :
+  - envoyer un paquet UDP en diffusion totale sur le port 4001 (une fois suffit)
+  - implanter un serveur TCP multi-flux sur le port 4002
+  - le serveur TCP lit les messages des clients et transmet aux autres clients
+  - restez au niveau des descripteurs de socket (pas de fdopen)
+  - pour noter les descripteurs des autres clients utilisez un tableau T de 1024 élément 
+      * si T[s]=0 pas de client avec une socket de dialogue s
+      * si T[s]=1 alors un client avec une socket de dialogue s est connecté
+    vous évitez ainsi de devoir utiliser des sémaphores
+  - un processus sur le réseau vous permet de tester votre programme
+  - si le processus écrit StOp sur une connexion TCP vers votre serveur c'est que le test est un succès
+
+Pour le micro-client :
+  - attendre un paquet UDP sur le port 5001 (envoyé en diffusion totale)
+  - notez que recevoirUDP retourne le nom de la machine ayant envoyé le paquet UDP
+  - se connecter en TCP port 5002 sur la machine ayant envoyé le paquet UDP
+  - transmettre sur la connexion TCP le message reçu par UDP
+  - un processus sur le réseau vous permet de tester votre programme
+  - si le processus répond StOp sur la connexion TCP c'est que vous avez envoyé le bon message
+
+Dans le fichier "infos" mettez le résultat des commandes hostname et ip a
+
+Avant d'envoyer votre code faites un "make clean", créez une tarball avec la commande
+
+tar cvf PSR_DS_VOTRENOM.tar PSR_DS.eleves
+
+Envoyez le .tar par courriel à l'adresse rex@plil.fr
